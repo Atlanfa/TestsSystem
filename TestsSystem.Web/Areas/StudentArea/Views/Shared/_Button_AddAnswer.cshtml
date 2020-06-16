@@ -1,0 +1,13 @@
+﻿@model int
+@{ 
+    string dataQuestion = string.Format($"#_add_answer_modal{Model}");
+}
+
+<td>
+    <button class="btn btn-sm btn-dark float-right"
+            data-target="@dataQuestion"
+            data-toggle="modal"
+            type="button">
+        Відповісти
+    </button>
+</td>

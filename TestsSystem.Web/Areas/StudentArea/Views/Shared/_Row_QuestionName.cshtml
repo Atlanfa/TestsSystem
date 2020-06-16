@@ -1,0 +1,7 @@
+﻿@model int
+@inject TestsSystem.Web.Contracts.IServItems _items
+@{ 
+    var question = await _items.GetQuestionAsync(Model);
+}
+
+<td>@question.QuestionName</td>

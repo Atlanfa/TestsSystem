@@ -1,0 +1,44 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject TestsSystem.Web.Contracts.IServSession _session
+@{
+    string prepId = _session.User.Email;
+}
+
+<div class="modal-dialog modal-dark" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Додавання предмета</h5>
+            <button data-dismiss="modal"
+                    aria-label="Close"
+                    class="close"
+                    type="button">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form method="post" asp-page-handler="AddSabject">
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <input class="form-control"
+                               id="_subject_name"
+                               type="text"
+                               name="Name"
+                               placeholder="Введіть назву предмета"
+                               required>
+                    </div>
+                    <input type="hidden"
+                           name="prepod"
+                           id="_subject_prepod"
+                           value="@prepId" />
+                </div>
+                <div class="row m-0"
+                     id="_subject_add_area">
+                    <button class="btn btn-secondary col-md-12"
+                            type="submit">
+                        Додати
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

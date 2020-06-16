@@ -1,0 +1,7 @@
+﻿@page "{handler?}"
+@model TestsSystem.Web.Areas.Identity.Pages.IndexModel
+@using static TestsSystem.Web.Helper.StringConstant
+@{
+    ViewData["Title"] = "Авторизація";
+}
+@if (Model.IdentityState == LOGIN)@await Html.PartialAsync("_Partial_Login")

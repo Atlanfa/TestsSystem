@@ -1,0 +1,43 @@
+﻿@model List<TestsSystem.Core.DTO.DtoQuestion>
+
+@if (Model != null && Model.Count > 0)
+{
+    <div class="col-sm-12">
+        <table class="table table-responsive-sm table-sm">
+            <tbody>
+                @foreach (var question in Model)
+                {
+                    <tr>
+                        <td>
+                            <input class="_checked_questions"
+                                   value="@string.Format($"{question.Id}-1")"
+                                   id="@question.Id"
+                                   type="checkbox" />
+                        </td>
+                        <td>@question.QuestionName</td>
+                        <td>
+                            <select class="_select_try">
+                                <option data-value="@string.Format($"{question.Id}-1")"
+                                        data-target="@string.Format($"#{question.Id}")"
+                                        value="1">
+                                    1 спроба
+                                </option>
+                                <option data-value="@string.Format($"{question.Id}-2")"
+                                        data-target="@string.Format($"#{question.Id}")"
+                                        value="2">
+                                    2 спроби
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="col-sm-12 ml-3">
+        У цій темі немає питань
+    </div>
+}

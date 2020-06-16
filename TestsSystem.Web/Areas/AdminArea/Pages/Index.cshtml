@@ -1,0 +1,49 @@
+﻿@page "{handler?}"
+@model IndexModel
+@inject IAntiforgery _antiforgery
+@using static TestsSystem.Web.Helper.StringConstant
+@{
+    ViewData["Title"] = "Панель Администратора";
+    ViewData["Description"] = "Адміністрування акаунтів";
+
+    var afToken = _antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
+}
+<input name="__RequestVerificationToken" type="hidden" value="@afToken">
+
+<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show"
+     id="sidebar">
+    <ul class="c-sidebar-nav"
+        id="_sidebar_nav">
+        <li class="c-sidebar-nav-title">
+            Категорії користувачів
+        </li>
+        <li class="c-sidebar-nav-item my-point-link"
+            data-target="@STUDENT">
+            <span class="c-sidebar-nav-link">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="vendors/coreui/icons/svg/free.svg#cil-user"></use>
+                </svg>
+                Студенти
+            </span>
+        </li>
+        <li class="c-sidebar-nav-item my-point-link"
+            data-target="@PREPOD">
+            <span class="c-sidebar-nav-link">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="vendors/coreui/icons/svg/free.svg#cil-blind"></use>
+                </svg>
+                Викладачі
+            </span>
+        </li>
+    </ul>
+</div>
+
+<div class="c-wrapper">
+    <header class="c-header c-header-light c-header-fixed">
+        @await Html.PartialAsync("_Partial_HeaderlineMain")
+    </header>
+    <div class="c-body">
+        @await Html.PartialAsync("_Partial_Admin_AddAppUser", Model.Notification)
+        <main class="c-main" id="_main_area"> </main>
+    </div>
+</div>

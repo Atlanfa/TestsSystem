@@ -1,0 +1,57 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject TestsSystem.Web.Contracts.IServItems _items
+@inject TestsSystem.Web.Contracts.IServSession _sess
+@{ 
+    var subjects = await _items.GetSubjectsAsync(_sess.User.Email);
+    var firstSubj = subjects.FirstOrDefault();
+    var themes = firstSubj == null ? null : await _items.GetThemesAsync(firstSubj.Id);
+    var firstTheme = themes == null ? null : themes.FirstOrDefault();
+    var questions = firstTheme == null ? null : await _items.GetQuestionsAsync(firstTheme.Id);
+}
+
+<div class="modal-dialog modal-dark" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Прив'язка Питаннь</h5>
+            <button data-dismiss="modal"
+                    aria-label="Close"
+                    class="close"
+                    type="button">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body"
+             id="_modal_bind_questions">
+            <input id="_modal_connect_questions"
+                   name="studentMail"
+                   type="hidden" />
+            <div class="form-group row">
+                <span class="help-block ml-3">Оберіть предмет:</span>
+                <select class="form-control ml-3 mr-3"
+                        id="_subjects_select">
+                    <partial name="_Select_Subjects" model="subjects" />
+                </select>
+                <span class="help-block ml-3 mt-2">Оберіть тему:</span>
+                <select class="form-control ml-3 mr-3"
+                        id="_theme_selected_area"
+                        data-target="_subjects_select">
+                    <partial name="_Select_Themes" model="themes" />
+                </select>
+            </div>
+            <div class="form-group row"
+                 id="_dynamic_questions_area">
+                <partial name="_Partial_SelectedQuestionsTable" model="questions" />
+            </div>
+            <div class="row m-0"
+                 id="_question_add_area">
+                <button class="btn btn-secondary col-md-12"
+                        id="_question_add_submit"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                        type="submit">
+                    Прив'язати
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

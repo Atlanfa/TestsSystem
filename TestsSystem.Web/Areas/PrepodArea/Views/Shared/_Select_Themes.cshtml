@@ -1,0 +1,13 @@
+﻿@model List<TestsSystem.Core.DTO.DtoTheme>
+
+@if (Model != null && Model.Count > 0)
+{
+    @foreach (var theme in Model)
+    {
+        <option value="@theme.Id">@theme.Name</option>
+    }
+}
+else 
+{
+    <option>Немає доданих тем</option>
+}

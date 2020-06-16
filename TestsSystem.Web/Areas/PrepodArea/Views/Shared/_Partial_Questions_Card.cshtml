@@ -1,0 +1,50 @@
+﻿@model TestsSystem.Web.Models.UI.ConnectQuestionCard
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using static TestsSystem.Web.Helper.StringConstant
+@inject TestsSystem.Web.Contracts.IServHttpApi _http
+@{
+    var answ = await _http.GetAppUsersFromApiAsync(STUDENT);
+    var students = answ.AppUsers;
+}
+
+@if (Model.Notification != null)
+{
+    <partial name="_Partial_Notification" model="Model.Notification" />
+}
+
+<div class="container-fluid">
+    <div class="fade-in">
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">Оберить студента й прив'яжіть йому питання</div>
+                    <div class="card-body">
+                        <table class="table table-responsive-sm table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Ім'я</th>
+                                    <th>Фамілія</th>
+                                    <th>Пошта</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var user in students)
+                                {
+                                    <tr>
+                                        <td>@user.Name</td>
+                                        <td>@user.SecondName</td>
+                                        <td>@user.Email</td>
+                                        <td>
+                                            <partial name="_Button_ConnectQuestion" model="user.Email" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

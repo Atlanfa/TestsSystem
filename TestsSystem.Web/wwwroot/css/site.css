@@ -1,0 +1,32 @@
+﻿.my-point-link {
+    cursor: pointer;
+}
+
+.avatar-position{
+    position:absolute;
+    right:10px;
+}
+
+.plus-icon{
+    position:relative;
+    left: -7px;
+    top:5px;
+}
+
+.help-block{
+    margin-left:3px;
+    font-size: 11px;
+}
+
+.loginNotify {
+    margin-top: -20px;
+    color: red;
+    font-size: small
+}
+
+.regNotify {
+    margin-top: -17px;
+    margin-bottom: -1px;
+    color: red;
+    font-size: small
+}

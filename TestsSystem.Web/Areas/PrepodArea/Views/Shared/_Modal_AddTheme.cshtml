@@ -1,0 +1,40 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="modal-dialog modal-dark" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Додавання теми</h5>
+            <button data-dismiss="modal"
+                    aria-label="Close"
+                    class="close"
+                    type="button">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form method="post" asp-page-handler="AddTheme">
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <input class="form-control"
+                               id="_theme_name"
+                               type="text"
+                               name="name"
+                               placeholder="Введіть назву теми"
+                               required/>
+                        <input type="hidden"
+                               name="subjectid"
+                               id="_modal_add_theme_subject"/>
+                    </div>
+                </div>
+                <div class="row m-0"
+                     id="_theme_add_area">
+                    <button class="btn btn-secondary col-md-12"
+                            id="_theme_add_submit"
+                            type="submit">
+                        Додати
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

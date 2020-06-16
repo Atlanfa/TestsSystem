@@ -1,0 +1,33 @@
+﻿@model TestsSystem.Web.Models.UI.PrepodMainCard
+@inject TestsSystem.Web.Contracts.IServPrepods _prepods
+@{
+    var prepodCard = await _prepods.GetPrepodMainCard();
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="container-fluid">
+    <div class="fade-in">
+        <div class="row mt-1">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">Інформація</div>
+                    <div class="card-body text-center">
+                        <p>Вітаю <b>@prepodCard.Name</b>. У Вас додано предметів : <b>@prepodCard.SubjectCount</b></p>
+                        <button class="btn btn-dark"
+                                data-toggle="modal"
+                                data-target="#_add_subject_modal"
+                                type="button">
+                            Додати предмет
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (Model.Notification != null)
+    {
+        <partial name="_Partial_Notification" model="Model.Notification" />
+    }
+</div>
+
+<partial name="_Partila_Subjects_Card" model="Model.IsSturtedTemplate" />

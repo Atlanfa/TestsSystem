@@ -1,0 +1,36 @@
+﻿@model List<TestsSystem.Core.DTO.DtoAppUser>
+
+<div class="container-fluid">
+    <div class="fade-in">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">Список користувачів</div>
+                    <div class="card-body">
+                        <table class="table table-responsive-sm table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Ім'я</th>
+                                    <th>Фамілія</th>
+                                    <th>Пошта</th>
+                                    <th>Пароль</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var user in Model)
+                                {
+                                    <tr>
+                                        <td>@user.Name</td>
+                                        <td>@user.SecondName</td>
+                                        <td>@user.Email</td>
+                                        <td>@user.Password</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

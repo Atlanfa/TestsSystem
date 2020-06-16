@@ -1,0 +1,13 @@
+﻿@model int
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject TestsSystem.Web.Contracts.IServItems _items
+
+<ul class="list-group">
+    @foreach (var item in await _items.GetThemesAsync(Model))
+    {
+        <li class="list-group-item d-flex justify-content-between align-items-center pl-4">
+            @item.Name
+            <partial name="_Button_AddQuestion" model="item.Id" />
+        </li>
+    }
+</ul>

@@ -1,0 +1,50 @@
+﻿@model List<TestsSystem.Core.DTO.DtoAnswer>
+@using static TestsSystem.Web.Helper.StringConstant
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    int count = 0;
+    var answers = Model.Where(a => a.State == ISSUED);
+}
+
+<div class="container-fluid">
+    <div class="fade-in">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">Список питань</div>
+                    <div class="card-body">
+                        <table class="table table-responsive-sm table-sm">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Питання</th>
+                                    <th>Кількість спроб</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var answer in answers)
+                                {
+                                    <tr>
+                                        <td>@(count+=1)</td>
+                                        <partial name="_Row_QuestionName" model="answer.QuestionId" />
+                                        <td>Залишилось спроб: @answer.TryCount</td>
+                                        <partial name="_Button_AddAnswer" model="answer.QuestionId" />
+                                    </tr>
+
+                                    <div class="modal fade"
+                                         id="@string.Format($"_add_answer_modal{answer.QuestionId}")"
+                                         tabindex="-1"
+                                         role="dialog"
+                                         aria-hidden="true">
+                                        <partial name="_Modal_GiveAnswer" model="answer"/>
+                                    </div>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

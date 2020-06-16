@@ -1,0 +1,80 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="modal-dialog modal-dark" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Додавання Питання</h5>
+            <button data-dismiss="modal"
+                    aria-label="Close"
+                    class="close"
+                    type="button">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form method="post" asp-page-handler="AddQuestion">
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <span class="help-block">Введіть питання:</span>
+                        <textarea class="form-control"
+                                  id="_question_name"
+                                  type="text"
+                                  name="QuestionName"
+                                  required></textarea>
+                        <input id="_modal_add_question_theme"
+                               type="hidden"
+                               name="themeid" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <span class="help-block">Введіть корректну відповідь:</span>
+                        <textarea class="form-control"
+                                  id="_correct_answer"
+                                  type="text"
+                                  name="CorrectAnswer"
+                                  required></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <span class="help-block">Введіть варіант відповіді "A":</span>
+                        <textarea class="form-control"
+                                  id="_answer_variant_a"
+                                  type="text"
+                                  name="AnswerVariantA"
+                                  required></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <span class="help-block">Введіть варіант відповіді "B":</span>
+                        <textarea class="form-control"
+                                  id="_answer_variant_b"
+                                  type="text"
+                                  name="AnswerVariantB"
+                                  required></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <span class="help-block">Введіть варіант відповіді "C":</span>
+                        <textarea class="form-control"
+                                  id="_answer_variant_c"
+                                  type="text"
+                                  name="AnswerVariantC"
+                                  required></textarea>
+                    </div>
+                </div>
+                <div class="row m-0"
+                     id="_question_add_area">
+                    <button class="btn btn-secondary col-md-12"
+                            id="_question_add_submit"
+                            type="submit">
+                        Додати
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿@page  "{handler?}"
+@model IndexModel
+@inject IAntiforgery _antiforgery
+@using static TestsSystem.Web.Helper.StringConstant
+@{
+    ViewData["Title"] = "Панель Викладача";
+    ViewData["Description"] = "Адміністрування предметів, тем й питань";
+
+    var afToken = _antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
+}
+<input name="__RequestVerificationToken" type="hidden" value="@afToken">
+
+<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show"
+     id="sidebar">
+    <ul class="c-sidebar-nav"
+        id="_sidebar_nav">
+        <li class="c-sidebar-nav-title">
+            Предмети й Питання
+        </li>
+        <li class="c-sidebar-nav-item my-point-link"
+            data-target="@SUBJECTS">
+            <span class="c-sidebar-nav-link">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="vendors/coreui/icons/svg/free.svg#cil-book"></use>
+                </svg>
+                Предмети
+            </span>
+        </li>
+        <li class="c-sidebar-nav-item my-point-link"
+            data-target="@STUDENT">
+            <span class="c-sidebar-nav-link">
+                <svg class="c-sidebar-nav-icon">
+                    <use xlink:href="vendors/coreui/icons/svg/free.svg#cil-people"></use>
+                </svg>
+                Студенти
+            </span>
+        </li>
+    </ul>
+</div>
+
+<div class="c-wrapper">
+    <header class="c-header c-header-light c-header-fixed">
+        <partial name="_Partial_HeaderlineMain" />
+    </header>
+    <div class="c-body">
+        <main class="c-main" id="_main_area">
+            <partial name="_Prepod_MainCard" model="Model.PrepodMainCard" />
+        </main>
+    </div>
+</div>
+
+<div class="modal fade"
+     id="_add_subject_modal"
+     tabindex="-1"
+     role="dialog"
+     aria-hidden="true">
+    <partial name="_Modal_AddSubject" />
+</div>
+
+<div class="modal fade"
+     id="_add_theme_modal"
+     tabindex="-1"
+     role="dialog"
+     aria-hidden="true">
+    <partial name="_Modal_AddTheme" />
+</div>
+
+<div class="modal fade"
+     id="_add_question_modal"
+     tabindex="-1"
+     role="dialog"
+     aria-hidden="true">
+    <partial name="_Modal_AddQuestion" />
+</div>
+
+<div class="modal fade"
+     id="_connect_question_modal"
+     tabindex="-1"
+     role="dialog"
+     aria-hidden="true">
+    <partial name="_Modal_ConnectQuestion" />
+</div>

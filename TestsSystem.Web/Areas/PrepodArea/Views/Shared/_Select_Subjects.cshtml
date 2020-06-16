@@ -1,0 +1,13 @@
+﻿@model List<TestsSystem.Core.DTO.DtoSubject>
+
+@if (Model != null && Model.Count > 0)
+{
+    @foreach (var subj in Model)
+    {
+        <option value="@subj.Id">@subj.Name</option>
+    }
+}
+else
+{
+    <option>Немає доданих предметів</option>
+}

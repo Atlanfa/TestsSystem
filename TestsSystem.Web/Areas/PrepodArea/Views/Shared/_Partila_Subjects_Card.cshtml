@@ -1,0 +1,43 @@
+﻿@model bool
+@using TestsSystem.Web.Extensions
+@inject TestsSystem.Web.Contracts.IServItems _items
+@inject TestsSystem.Web.Contracts.IServSession _sess
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{ 
+    var subjects = await _items.GetSubjectsAsync(_sess.User.Email);
+    var views = subjects.ToSubjectView();
+}
+
+<div class="container-fluid">
+    <div class="fade-in">
+        <div class="row mt-2">
+            <div class="col-sm-12">
+                <div class="accordion" id="accordion" role="tablist">
+                    @foreach (var item in views)
+                    {
+                        <div class="card mb-0">
+                            <div class="card-header" id="headingOne" role="tab">
+                                <h5 class="mb-0">
+                                    <a data-toggle="collapse"
+                                       href="@item.CollapseHref"
+                                       aria-expanded="@item.Expanded"
+                                       aria-controls="@item.CollapseId">
+                                        @item.SubjectName
+                                    </a>
+                                    <partial name="_Button_AddTheme" model="@item.SubjectId"/>
+                                </h5>
+                            </div>
+                            <div class="collapse @item.Show"
+                                 id="@item.CollapseId"
+                                 role="tabpanel"
+                                 aria-labelledby="@item.LabeledBy"
+                                 data-parent="#accordion">
+                                <partial name="_Partial_ThemesList" model="item.SubjectId"/>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

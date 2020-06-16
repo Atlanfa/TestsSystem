@@ -1,0 +1,33 @@
+﻿@model TestsSystem.Web.Models.UI.StudentMainCard
+@using static TestsSystem.Web.Helper.StringConstant
+@inject TestsSystem.Web.Contracts.IServStudents _students
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    var card = await _students.GetStudentMainCardAsync();
+    int count = card.Answers != null ? card.Answers
+        .Where(a => a.State == ISSUED).Count() : 0;
+}
+
+<div class="container-fluid">
+    <div class="fade-in">
+        <div class="row mt-1">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">Інформація</div>
+                    <div class="card-body text-center">
+                        <p>Вітаю <b>@card.Name</b> Ви маєте питання для відповіді : <b>@count</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (Model.Notification != null)
+    {
+        <partial name="_Partial_Notification" model="Model.Notification" />
+    }
+</div>
+
+@if (count > 0)
+{
+    <partial name="_Table_IssuedAnswers" model="card.Answers" />
+}
